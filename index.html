@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Crud Javascript</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Table Responsive"/>
+    <meta name="keywords" content="table, responsive"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link href="css/vao.css" media="screen" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" href="fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="fonts/font-awesome.min.css">
+</head>
+<body onpageshow="getUser()">
+
+<h1><span class="blue"></span>CRUD<span class="blue"></span> <span class="pink">Only Javascript</span></h1>
+<h2 style="position: relative; top: 20px;">
+    <div class="d-flex justify-content-center">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                style="width: 200px;color: aliceblue; background-color: darkcyan; border-color: aliceblue; text-transform: uppercase;">
+            <i class="fas fa-user-plus"></i>
+        </button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal"  onclick="tb.innerHTML=''; displayAll()"
+                style="width: 200px;color: aliceblue; background-color: darkcyan; border-color: aliceblue; text-transform: uppercase;">
+            <i class="fas fa-sync"></i>
+        </button>
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+             aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel" style="color: #030125;font-weight: bold;">Add user info</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="user" method="post">
+                            <div class="mb-3">
+                                <input class="form-control form-control-user" type="text"
+                                       id="exampleLastName" placeholder="Enter Name"
+                                       name="name" required
+                                       style="background: transparent;display: inline-flex;position: relative;">
+
+                            </div>
+                            <div class="mb-3">
+                                <input class="form-control form-control-user" type="email"
+                                       id="exampleInputEmail" aria-describedby="emailHelp"
+                                       placeholder="Enter Email Address" name="email" required
+                                       style="background: transparent;display: inline-flex;position: relative;">
+                            </div>
+                            <div class="mb-3">
+                                <label style="color: #030125;font-weight: bold; text-align: left;">Devise : </label>
+                                <select class="form-select" id="devise" style="color: #030125; font-weight: bold; border-width: 1px; text-align: center;" required>
+                                    <option value="USD" style="color: #030125; font-weight: bold;border-width: 1px; text-align: center;">United State Dollar</option>
+                                    <option value="EUR" style="color: #030125; font-weight: bold; border-width: 1px; text-align: center;">Euro</option>
+                                    <option value="MGA" style="color: #030125; font-weight: bold; border-width: 1px; text-align: center;">Malagasy Ariary</option>
+                                    <option value="GBP" style="color: #030125; font-weight: bold; border-width: 1px; text-align: center;">Livre Sterling</option>
+                                    <option value="JPY" style="color: #030125; font-weight: bold; border-width: 1px; text-align: center;">Japan Yen</option>
+                                </select>
+                            </div>
+                        </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="submitBtn"
+                                    style="color: aliceblue; background-color: darkcyan; border-color: aliceblue; text-transform: uppercase;">SAVE
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</h2>
+
+<table id="container" class="container">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Devise</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody id="tb">
+    </tbody>
+</table>
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Update User Info</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="user" method="post">
+                    <label id="idval"></label>
+                    <div class="mb-3">
+                        <input class="form-control form-control-user" type="text"
+                               id="exampleName" placeholder="Enter Name"
+                               name="name" required
+                               style="background: transparent;display: inline-flex;position: relative;">
+
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-control form-control-user" type="email"
+                               id="exampleEmail" aria-describedby="emailHelp"
+                               placeholder="Enter Email Address" name="email" required
+                               style="background: transparent;display: inline-flex;position: relative;">
+                    </div>
+                    <div class="mb-3">
+                        <label style="color: #030125;font-weight: bold; text-align: left;">Devise : </label>
+                        <select class="form-select" id="ExempleDevise" style="color: #030125; font-weight: bold; border-width: 1px; text-align: center;" required>
+                            <option value="USD" style="color: #030125; font-weight: bold;border-width: 1px; text-align: center;">United State Dollar</option>
+                            <option value="EUR" style="color: #030125; font-weight: bold; border-width: 1px; text-align: center;">Euro</option>
+                            <option value="MGA" style="color: #030125; font-weight: bold; border-width: 1px; text-align: center;">Malagasy Ariary</option>
+                            <option value="GBP" style="color: #030125; font-weight: bold; border-width: 1px; text-align: center;">Livre Sterling</option>
+                            <option value="JPY" style="color: #030125; font-weight: bold; border-width: 1px; text-align: center;">Japan Yen</option>
+                        </select>
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="editBtn"
+                            style="color: aliceblue; background-color: darkcyan; border-color: aliceblue; text-transform: uppercase;">UPDATE
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="script.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
